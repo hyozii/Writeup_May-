@@ -46,6 +46,7 @@ COPY ./deploy/flag.txt /는 ./deploy/flag.txt /파일을 컨테이너의 루트 
 
 이 파일을 통해 플래그를 얻기 위해서는 어디를 확인해봐야 하는지를 알 수 있었다.
 
+
 4. index.php
 
 php 파일이니 저번에 배운대로 확장자를 html로 바꿔보자. 그러면 파일의 아이콘이 크롬 아이콘으로 바뀐다. 이 파일을 클릭하면 다음과 같은 웹 브라우저가 나온다.
@@ -64,4 +65,10 @@ php 파일이니 저번에 배운대로 확장자를 html로 바꿔보자. 그�
 
 일단 마저 코드를 분석해보자. 
 
+![image](https://github.com/hyozii/Writeup_May-/assets/163365936/7d14c6a6-11b1-479c-a250-94ff25099aff)
+![image](https://github.com/hyozii/Writeup_May-/assets/163365936/544948c5-070c-4a1d-9b05-4a7579f8bba1)
+![image](https://github.com/hyozii/Writeup_May-/assets/163365936/e86601ac-0ed7-4ecb-821b-61924c31cf34)
+
+
+일단 구조는 <!DOCTYPE html>, <html>, <head>, <body>로 이루어진 전형적인 html 구조이다. <h1>Pharmacy💊</h1> 와 <h2>Upload your prescription in gif format...</h2>로 웹 페이지에 제목 형식으로 나타날 수 있게 했다. 
 
