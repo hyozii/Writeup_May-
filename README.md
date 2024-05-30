@@ -70,5 +70,31 @@ php 파일이니 저번에 배운대로 확장자를 html로 바꿔보자. 그�
 ![image](https://github.com/hyozii/Writeup_May-/assets/163365936/e86601ac-0ed7-4ecb-821b-61924c31cf34)
 
 
-일단 구조는 <!DOCTYPE html>, <html>, <head>, <body>로 이루어진 전형적인 html 구조이다. <h1>Pharmacy💊</h1> 와 <h2>Upload your prescription in gif format...</h2>로 웹 페이지에 제목 형식으로 나타날 수 있게 했다. 
+일단 구조는 <!DOCTYPE html>, <html>, <head>, <body>로 이루어진 전형적인 html 구조이다. Pharmacy💊와 Upload your prescription in gif format...으로 웹 페이지에 제목 형식으로 나타날 수 있게 했다. 
+
+다음으로 <form> 태그를 사용해 파일 업로드 폼을 구현했다. action ="index.php" 속성으로 폼 데이터가 전송될 URL을 지정할 수 있고, method="post" 속성은 HTTP POST 방식으로 데이터를 전송할 수 있게 한다. 또 enctype="multipart/form-data" 속성은 파일 업로드를 가능하게 한다.
+
+php 부분을 살펴보자면, if(isset($_POST["submit:"]))를 통해 폼 데이터가 전송되었는지, 즉 파일이 업로드 되었는지 확인한다. 그리고 사용자가 업로드한 파일이 gif 형식인지 확인하고, gif 형식이 않은 경우 오류 메시지를 출력하도록 해야 하는데, 이런 기능을 하기 위해 mime_content_type($tmpFile) !== "image/gif" 와 $fileExtension !== "gif" 코드를 사용한다. 
+
+만약 사용자가 업로드한 파일이 gif 파일이라면 move_uploaded_file($tmpFile, $targetFile) 함수를 사용해 파일을 저장한다. 
+
+이렇게 이 코드는 파일 업로드와 gif 파일 형식인지 확인하는 역할을 한다는 것을 알 수 있다. 만약 사용자가 올바르게 gif 파일을 업로드하면 문제 해결의 실마리가 보이거나 플래그를 찾을 수 있지 않을까 싶다. 
+
+5. style.css
+
+![image](https://github.com/hyozii/Writeup_May-/assets/163365936/3447cf73-7f3d-42f3-bcd6-db5b3f1a81aa)
+
+웹을 공부하면서 css를 조금 이해했기 때문에 구조는 쉽게 파악할 수 있었다. 근데 이 파일은 문제 해결에는 딱히 도움이 되지 않고 걍 진짜로 웹 브라우저를 만드는 데에 필요한 파일 같았다. 보더나 마진 등 간격이나 글씨체 등 그냥 일반적인 파일이라고 느껴져서 깊은 분석 없이 넘어가기로 했다.
+
+6. supermarket.php
+
+![image](https://github.com/hyozii/Writeup_May-/assets/163365936/480818ca-7677-4579-be5d-2c7009223dfa)
+
+이 파일의 코드를 살펴보면 goodbye 함수와 supermarket 클래스로 이루어져있는 것을 확인할 수 있다. 먼저 goodbye 함수는 customer라는 하나의 매개변수를 받는다. 입력받은 customer 변수와 함께 goodbye, customer!이라고 출력된다.
+
+supermarket 클래스 부분을 확인해보자면, this->greet는 goodbye이니까 goodbye 함수가 호출된다. 그리고 this->customer는 dream이니까 goodbye 함수의 인자로 전달된다. 또 안에 destruct 메서드가 있는데, 얘는 객체가 소멸할 때 자동으로 호출되는 메서드이다. 따라서 supermarket 클래스의 객체가 소멸될 때 destruct 메서드에서 goodbye 함수를 호출해서 goodbye, dream!을 출력하는 코드이다.
+
+7. 방향성 예측
+
+이렇게 파일별로 직접 코드를 보고 어떤 내용인지 파악해보았다. css 파일이나 index.php 파일 같은 경우는 비교적 쉽게 해석할 수 있었지만, Dockerfile 같이 계속 찾아봐야 하는 파일도 있었다. 파일의 확장자명을 gif로 바꿔서 웹 브라우저에 열면 index.php나 supermarket.php에서 본 것처럼 어떤 과정을 거쳐 어떤 결과가 나올 것이라고 생각했는데, 그냥 노트북에서 바로 확장자명을 gif로 바꾸니 (당연히) 정상적으로 파일이 작동하지 않았다. 찾아보니 php 파일에 코드를 어떻게 작성하면 확장명을 gif로 바꿀 수 있다는 것 같던데, 어떤 파일에, 어느 위치에 어떻게 작성하는지 몰라서 이쯤 해야할 것 같다. 라이트업이 나온다면 그걸 참고해 천천히 따라해봐야겠다.
 
