@@ -32,7 +32,7 @@ COPY ./deploy/flag.txt /는 ./deploy/flag.txt /파일을 컨테이너의 루트 
 
 ![image](https://github.com/hyozii/Writeup_May-/assets/163365936/136ebb43-a35b-4b25-a033-2e39d670eadb)
 
-다음으로 flag.txt를 열어보니 placeholder라는 단어가 들어있다. 이번 문제 파일 안에 이름이 'placeholder'인 파일이 있는데, flag를 얻기 위해서는 저 파일을 이용해야 한다는 뜻일까? 일단 placeholder 파일이 중요하다는 사실을 확인하고 넘어가보자.
+다음으로 flag.txt를 열어보니 placeholder라는 단어가 들어있다. placeholder는 웹을 공부할 때 입력 필드에 사용자가 올바른 값을 넣을 수 있도록 힌트를 줄 때 사용하는 것'이었다. 이번 문제 파일 안에 이름이 'placeholder'인 파일이 있는데, 그럼 그 파일이 힌트라는 뜻일까? flag를 얻기 위해서는 저 파일을 이용해야 한다는 뜻일까? 일단 placeholder 파일이 중요하다는 사실을 확인하고 넘어가보자.
 
 3. run.sh
 
@@ -40,6 +40,28 @@ COPY ./deploy/flag.txt /는 ./deploy/flag.txt /파일을 컨테이너의 루트 
 
 .sh 파일은 주로 셸 스크립트 파일의 확장자로 사용되고, 셸 스크립트 파일은 기본 명령어나 간단한 문법을 사용해 사용자가 작성하는 스크립트 파일이다. 각 줄의 코드를 해석해보자면,
 
-#!/bin/bash는 이 스크립트가 bash 셸에서 실행되어야 한다는 것을 알려준다. 그리고 export FLAG="test"
+#!/bin/bash는 이 스크립트가 bash 셸에서 실행되어야 한다는 것을 알려준다. 그리고 export FLAG="test"는 export 명령어를 사용해 환경 변수를 설정한 것이다. 따라서 해당 코드는 FLAG 환경 변수가 test로 설정된 것이다. 다른 워게임 문제들도 이런 식으로 플래그를 찾는 방식이라고 하는데, flag 환경 변수를 찾아내고, 그 값이 실제로 플래그인지 확인해야 한다고 한다.
+
+마지막으로, &>/dev/null /usr/sbin/apachectl -DFOREGROUND -k start는 Apache 웹 서버를 실행해준다. 웹 서버를 실행할 때 필요한 코드인 것 같다.
+
+이 파일을 통해 플래그를 얻기 위해서는 어디를 확인해봐야 하는지를 알 수 있었다.
+
+4. index.php
+
+php 파일이니 저번에 배운대로 확장자를 html로 바꿔보자. 그러면 파일의 아이콘이 크롬 아이콘으로 바뀐다. 이 파일을 클릭하면 다음과 같은 웹 브라우저가 나온다.
+
+![image](https://github.com/hyozii/Writeup_May-/assets/163365936/3b1f1aab-4145-4ccc-8701-89de0d62e750)
+
+약국 테마의 웹 브라우저인만큼 '약국, 당신의 처방전을 gif 형식으로 업로드하세요'라고 쓰여있다. 플래그를 얻기 위해서는 문제 파일 중 하나를 gif 형식으로 바꿔서 저 파일에 넣어야 하는 것 같다.
+
+![image](https://github.com/hyozii/Writeup_May-/assets/163365936/7fc8e736-8a7a-4a44-b8e7-1ee4acf9cded)
+
+혹시 몰라 placeholder 파일을 .gif 형식으로 바꾸고 업로드해 보았다. 
+
+![image](https://github.com/hyozii/Writeup_May-/assets/163365936/6ab2488a-e002-43dd-87cf-d2af1e50a811)
+
+.gif 형식으로 바꾸지 않아 업로드에 실패했다는 메시지가 뜬다. 이렇게 바꾸는 건 안될 것 같고, html에서 코드를 추가해 php 파일을 gif 형식으로 변형해줘야 하는 것 같다. 일단 내가 생각하기에 이 문제를 푸는 방법은 문제 파일 중 하나를 gif 파일로 변환해 웹 브라우저에 업로드하는 것인데, 이 방법이 맞는지도 모르겠다....
+
+일단 마저 코드를 분석해보자. 
 
 
